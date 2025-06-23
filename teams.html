@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Teams - SUN Foundation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .team-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        .team-card.active {
+            border: 3px solid #f97316;
+            transform: scale(1.05);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        }
+        .dark {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .dark .bg-white {
+            background-color: #2d2d2d;
+            color: #ffffff;
+        }
+        .dark .text-gray-800 {
+            color: #ffffff;
+        }
+        .dark .text-gray-600 {
+            color: #d1d5db;
+        }
+        .dark .border-gray-200 {
+            border-color: #404040;
+        }
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 26px;
+            height: 26px;
+            background: #ffffff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        .theme-toggle.dark::before {
+            transform: translateX(30px);
+        }
+        .theme-toggle .icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle .sun-icon {
+            left: 8px;
+            color: #fbbf24;
+        }
+        .theme-toggle .moon-icon {
+            right: 8px;
+            color: #6366f1;
+        }
+        .theme-toggle.dark .sun-icon {
+            opacity: 0;
+        }
+        .theme-toggle:not(.dark) .moon-icon {
+            opacity: 0;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        .dark .modal-content {
+            background-color: #2d2d2d;
+            color: #ffffff;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .modal-header {
+            padding: 20px 25px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .dark .modal-header {
+            border-bottom-color: #404040;
+        }
+        
+        .modal-body {
+            padding: 25px;
+        }
+        
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #6b7280;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #ef4444;
+        }
+        
+        .dark .close {
+            color: #9ca3af;
+        }
+        
+        .dark .close:hover {
+            color: #f87171;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Top Bar -->
+    
+
+    <!-- Navbar -->
+    
+
+    <!-- Header Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6">Our Dedicated Teams</h1>
+            <p class="text-xl max-w-3xl mx-auto">Discover our passionate teams working tirelessly to create positive change in communities across India. Each team has a unique mission and dedicated leaders driving impactful initiatives.</p>
+        </div>
+    </section>
+
+    <!-- Team Selection Section -->
+    <section class="py-12 bg-white dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-8">Select a Team to Explore</h2>
+            
+            <!-- Team Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Feeding Hands -->
+                <div class="team-card bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 border-2 border-transparent" data-team="feeding-hands">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heart text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Feeding Hands</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">25 Members</p>
+                    </div>
+                </div>
+
+                <!-- Life Saviours -->
+                <div class="team-card bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 border-2 border-transparent" data-team="life-saviours">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heartbeat text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Life Saviours</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">30 Members</p>
+                    </div>
+                </div>
+
+                <!-- Tech Saala -->
+                <div class="team-card bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 border-2 border-transparent" data-team="tech-saala">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-laptop-code text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Tech Saala</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">20 Members</p>
+                    </div>
+                </div>
+
+                <!-- Elite Queens -->
+                <div class="team-card bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 border-2 border-transparent" data-team="elite-queens">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-crown text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Elite Queens</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">35 Members</p>
+                    </div>
+                </div>
+
+                <!-- Visual Vibes -->
+                <div class="team-card bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 border-2 border-transparent" data-team="visual-vibes">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-palette text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Visual Vibes</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">15 Members</p>
+                    </div>
+                </div>
+
+                <!-- Guiding Lights -->
+                <div class="team-card bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 border-2 border-transparent" data-team="guiding-lights">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lightbulb text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Guiding Lights</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">40 Members</p>
+                    </div>
+                </div>
+
+                <!-- Green Warriors -->
+                <div class="team-card bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 border-2 border-transparent" data-team="green-warriors">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-leaf text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Green Warriors</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">28 Members</p>
+                    </div>
+                </div>
+
+                <!-- Digital Dreamers -->
+                <div class="team-card bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 border-2 border-transparent" data-team="digital-dreamers">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Digital Dreamers</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">22 Members</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Details Section -->
+    <section class="py-12 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <!-- Default State -->
+            <div id="default-state" class="text-center">
+                <div class="max-w-2xl mx-auto">
+                    <div class="w-32 h-32 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-4xl text-gray-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Select a Team Above</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Click on any team card to view detailed information about their mission, leader, and activities.</p>
+                </div>
+            </div>
+
+            <!-- Team Content (Hidden by default) -->
+            <div id="team-content" class="hidden fade-in">
+                <!-- Team Header -->
+                <div class="text-center mb-12">
+                    <h2 id="team-name" class="text-4xl font-bold text-gray-800 dark:text-white mb-4"></h2>
+                    <p id="team-motto" class="text-xl text-gray-600 dark:text-gray-300 italic"></p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Team Leader Profile -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
+                            <i class="fas fa-user-tie mr-3 text-orange-500"></i>
+                            Team Leader
+                        </h3>
+                        <div class="flex items-start space-x-6">
+                            <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                                <span id="leader-initials" class="text-2xl font-bold text-gray-600 dark:text-gray-300"></span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 id="leader-name" class="text-xl font-semibold text-gray-800 dark:text-white mb-2"></h4>
+                                <p id="leader-role" class="text-orange-500 font-medium mb-3"></p>
+                                <p id="leader-bio" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"></p>
+                                <div class="flex space-x-4 mt-4">
+                                    <a href="#" class="text-blue-500 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="text-green-500 hover:text-green-600"><i class="fab fa-whatsapp"></i></a>
+                                    <a href="#" class="text-purple-500 hover:text-purple-600"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Mission & Stats -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
+                            <i class="fas fa-bullseye mr-3 text-orange-500"></i>
+                            Mission & Impact
+                        </h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-800 dark:text-white mb-3">Our Mission</h4>
+                                <p id="team-mission" class="text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center p-4 bg-orange-50 dark:bg-gray-700 rounded-lg">
+                                    <div id="team-size" class="text-2xl font-bold text-orange-500"></div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-300">Members</div>
+                                </div>
+                                <div class="text-center p-4 bg-orange-50 dark:bg-gray-700 rounded-lg">
+                                    <div id="events-count" class="text-2xl font-bold text-orange-500"></div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-300">Events</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Events -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-8 flex items-center">
+                        <i class="fas fa-calendar-alt mr-3 text-orange-500"></i>
+                        Recent Events & Activities
+                    </h3>
+                    <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Events will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="modal-event-title" class="text-2xl font-bold mb-2" style="color: black;"> </h2>
+                <p id="modal-event-date" class="text-orange-500 font-medium"></p>
+            </div>
+            <div class="modal-body">
+                <div class="mb-6">
+                    <img id="modal-event-image" src="" alt="Event" class="w-full h-64 object-cover rounded-lg mb-4">
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2" style="color: black;">Event Description</h3>
+                        <p id="modal-event-description" class="leading-relaxed" style="color: black;"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2" style="color: black;">Impact & Achievements</h3>
+                        <p id="modal-event-impact" class="leading-relaxed" style="color: black;"></p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="text-center p-4 bg-orange-50 dark:bg-gray-700 rounded-lg">
+                            <div id="modal-participants" class="text-2xl font-bold text-orange-500"></div>
+                            <div class="text-sm text-gray-600 dark:text-gray-300">Participants</div>
+                        </div>
+                        <div class="text-center p-4 bg-orange-50 dark:bg-gray-700 rounded-lg">
+                            <div id="modal-location" class="text-2xl font-bold text-orange-500"></div>
+                            <div class="text-sm text-gray-600 dark:text-gray-300">Location</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 SUN Foundation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Team Data
+        const teamsData = {
+            'feeding-hands': {
+                name: 'Feeding Hands',
+                motto: 'No child should go to bed hungry',
+                mission: 'Dedicated to providing nutritious meals to underprivileged children and families. We believe that access to food is a basic human right and work tirelessly to ensure no one goes hungry.',
+                size: '25 Members',
+                eventsCount: '12',
+                leader: {
+                    name: 'Priya Sharma',
+                    role: 'Team Leader & Nutrition Coordinator',
+                    bio: 'Priya has been leading Feeding Hands for 3 years, bringing her expertise in nutrition and community outreach. She has helped establish 15 feeding centers across the district.',
+                    initials: 'PS'
+                },
+                events: [
+                    {
+                        title: 'Community Kitchen Launch',
+                        date: 'March 2024',
+                        image: 'sunimages/sun39.jpg',
+                        description: 'Launched a new community kitchen serving 200+ meals daily',
+                        impact: 'This initiative has provided over 15,000 meals to underprivileged families in the past 3 months. The kitchen operates 7 days a week and has created employment opportunities for 8 local women.',
+                        participants: '200+',
+                        location: 'Central District'
+                    },
+                    {
+                        title: 'Nutrition Awareness Camp',
+                        date: 'February 2024',
+                        image: 'sunimages/sun35.jpg',
+                        description: 'Educated 500+ families about balanced nutrition',
+                        impact: 'The awareness camp led to a 40% improvement in dietary habits among participating families. We distributed nutrition guides and cooking demonstrations for healthy meal preparation.',
+                        participants: '500+',
+                        location: '5 Villages'
+                    },
+                    {
+                        title: 'Food Distribution Drive',
+                        date: 'January 2024',
+                        image: 'sunimages/sun4.jpg',
+                        description: 'Distributed food packages to 1000+ families',
+                        impact: 'Successfully distributed essential food items including rice, pulses, and cooking oil to families affected by economic hardships. The drive covered 12 villages.',
+                        participants: '1000+',
+                        location: '12 Villages'
+                    }
+                ]
+            },
+            'life-saviours': {
+                name: 'Life Saviours',
+                motto: 'Healthcare for all, everywhere',
+                mission: 'Providing healthcare services and medical assistance to rural communities. Making quality healthcare accessible to all, regardless of their economic status.',
+                size: '30 Members',
+                eventsCount: '8',
+                leader: {
+                    name: 'Dr. Rajesh Kumar',
+                    role: 'Medical Director & Team Leader',
+                    bio: 'Dr. Kumar is a practicing physician with 15 years of experience. He leads our medical outreach programs and coordinates with healthcare professionals.',
+                    initials: 'RK'
+                },
+                events: [
+                    {
+                        title: 'Free Health Camp',
+                        date: 'April 2024',
+                        image: 'sunimages/sun14.jpg',
+                        description: 'Provided free health checkups to 800+ patients',
+                        impact: 'The health camp identified 150+ cases requiring immediate medical attention. We provided free medicines and referrals to specialists. 50+ patients received follow-up care.',
+                        participants: '800+',
+                        location: 'Rural Medical Center'
+                    },
+                    {
+                        title: 'Blood Donation Drive',
+                        date: 'March 2024',
+                        image: 'sunimages/sun7.jpg',
+                        description: 'Collected 150+ units of blood for emergency use',
+                        impact: 'The blood donation drive helped save 45+ lives in emergency situations. We partnered with 3 major hospitals and established a regular blood donation program.',
+                        participants: '150+',
+                        location: 'City Hospital'
+                    },
+                    {
+                        title: 'Medical Equipment Donation',
+                        date: 'February 2024',
+                        image: 'sunimages/sun48.jpg',
+                        description: 'Donated medical equipment worth ₹5 lakhs to rural clinics',
+                        impact: 'The donated equipment has improved healthcare services in 8 rural clinics. This includes diagnostic tools, monitoring equipment, and basic surgical instruments.',
+                        participants: '8 Clinics',
+                        location: 'Rural Areas'
+                    }
+                ]
+            },
+            'tech-saala': {
+                name: 'Tech Saala',
+                motto: 'Bridging the digital divide',
+                mission: 'Empowering youth with digital literacy and technology skills. Bridging the digital divide in rural areas through education and practical training.',
+                size: '20 Members',
+                eventsCount: '15',
+                leader: {
+                    name: 'Amit Patel',
+                    role: 'Tech Lead & Education Coordinator',
+                    bio: 'Amit is a software engineer passionate about making technology accessible to everyone. He has trained 500+ students in digital skills.',
+                    initials: 'AP'
+                },
+                events: [
+                    {
+                        title: 'Coding Bootcamp',
+                        date: 'April 2024',
+                        image: 'sunimages/sun39.jpg',
+                        description: 'Trained 100+ students in web development basics',
+                        impact: 'The bootcamp resulted in 25+ students securing internships and 15+ students starting their own web development projects. Many students now earn income through freelance work.',
+                        participants: '100+',
+                        location: 'Tech Center'
+                    },
+                    {
+                        title: 'Digital Literacy Workshop',
+                        date: 'March 2024',
+                        image: 'sunimages/sun35.jpg',
+                        description: 'Taught 200+ students computer basics and internet usage',
+                        impact: 'The workshop improved digital literacy by 60% among participants. Students can now use computers for education, job applications, and accessing government services online.',
+                        participants: '200+',
+                        location: 'Community Hall'
+                    },
+                    {
+                        title: 'Tech Career Guidance',
+                        date: 'February 2024',
+                        image: 'sunimages/sun4.jpg',
+                        description: 'Provided career guidance to 150+ aspiring tech professionals',
+                        impact: 'The guidance session helped 40+ students choose appropriate tech courses. 20+ students secured admission in technical institutes with our recommendations.',
+                        participants: '150+',
+                        location: 'Career Center'
+                    }
+                ]
+            },
+            'elite-queens': {
+                name: 'Elite Queens',
+                motto: 'Empowering women, building futures',
+                mission: 'Empowering women through skill development and entrepreneurship. Creating leaders of tomorrow by providing education, training, and support.',
+                size: '35 Members',
+                eventsCount: '10',
+                leader: {
+                    name: 'Meera Devi',
+                    role: 'Women Empowerment Coordinator',
+                    bio: 'Meera is a social worker dedicated to women empowerment. She has helped 200+ women become financially independent through skill training.',
+                    initials: 'MD'
+                },
+                events: [
+                    {
+                        title: 'Women Entrepreneurship Workshop',
+                        date: 'April 2024',
+                        image: 'sunimages/sun14.jpg',
+                        description: 'Trained 80+ women in business management and entrepreneurship',
+                        impact: 'The workshop led to 30+ women starting their own businesses. We provided seed funding of ₹50,000 to 15 promising entrepreneurs and ongoing mentorship support.',
+                        participants: '80+',
+                        location: 'Business Center'
+                    },
+                    {
+                        title: 'Skill Development Program',
+                        date: 'March 2024',
+                        image: 'sunimages/sun7.jpg',
+                        description: 'Taught 120+ women various vocational skills',
+                        impact: 'Women learned skills in tailoring, beauty services, and handicrafts. 60+ women are now earning ₹8,000-15,000 monthly through these skills. We established a cooperative for collective marketing.',
+                        participants: '120+',
+                        location: 'Skill Center'
+                    },
+                    {
+                        title: 'Women Leadership Summit',
+                        date: 'February 2024',
+                        image: 'sunimages/sun48.jpg',
+                        description: 'Organized leadership training for 100+ women leaders',
+                        impact: 'The summit empowered women to take leadership roles in their communities. 25+ women are now serving as village council members and community leaders.',
+                        participants: '100+',
+                        location: 'Conference Hall'
+                    }
+                ]
+            },
+            'visual-vibes': {
+                name: 'Visual Vibes',
+                motto: 'Stories that inspire change',
+                mission: 'Creating compelling visual content and digital media to amplify our mission and reach more communities. Using creativity to tell stories that matter.',
+                size: '15 Members',
+                eventsCount: '20',
+                leader: {
+                    name: 'Kavya Reddy',
+                    role: 'Creative Director & Media Lead',
+                    bio: 'Kavya is a multimedia artist and storyteller. She leads our creative team in producing impactful visual content and campaigns.',
+                    initials: 'KR'
+                },
+                events: [
+                    {
+                        title: 'Documentary Film Screening',
+                        date: 'April 2024',
+                        image: 'sunimages/sun39.jpg',
+                        description: 'Screened educational documentaries in 10 rural schools',
+                        impact: 'The screenings reached 2,000+ students and teachers. The documentaries covered topics like environmental conservation, women empowerment, and rural development, leading to increased awareness and community engagement.',
+                        participants: '2000+',
+                        location: '10 Schools'
+                    },
+                    {
+                        title: 'Photography Workshop',
+                        date: 'March 2024',
+                        image: 'sunimages/sun35.jpg',
+                        description: 'Taught 50+ students the art of storytelling through photography',
+                        impact: 'Students learned to capture social issues through photography. Their work was exhibited in a local gallery, raising awareness about community challenges and inspiring action.',
+                        participants: '50+',
+                        location: 'Art Gallery'
+                    },
+                    {
+                        title: 'Social Media Campaign',
+                        date: 'February 2024',
+                        image: 'sunimages/sun4.jpg',
+                        description: 'Launched awareness campaign reaching 10,000+ people online',
+                        impact: 'The campaign increased our social media following by 300% and generated ₹2 lakhs in donations. It also helped recruit 50+ new volunteers for various programs.',
+                        participants: '10000+',
+                        location: 'Online Platform'
+                    }
+                ]
+            },
+            'guiding-lights': {
+                name: 'Guiding Lights',
+                motto: 'Lighting the path to education',
+                mission: 'Providing educational support and mentorship to students. Lighting the path to a brighter future through quality education and guidance.',
+                size: '40 Members',
+                eventsCount: '18',
+                leader: {
+                    name: 'Arjun Kumar',
+                    role: 'Education Coordinator & Mentor',
+                    bio: 'Arjun is an educator with 12 years of teaching experience. He coordinates our educational programs and mentors students.',
+                    initials: 'AK'
+                },
+                events: [
+                    {
+                        title: 'Scholarship Distribution',
+                        date: 'April 2024',
+                        image: 'sunimages/sun14.jpg',
+                        description: 'Awarded scholarships to 200+ deserving students',
+                        impact: 'The scholarships worth ₹15 lakhs helped 200+ students continue their education. 80% of recipients showed improved academic performance, and 30+ students secured admission in prestigious institutions.',
+                        participants: '200+',
+                        location: 'Education Center'
+                    },
+                    {
+                        title: 'Career Counseling Session',
+                        date: 'March 2024',
+                        image: 'sunimages/sun7.jpg',
+                        description: 'Provided career guidance to 300+ high school students',
+                        impact: 'The counseling helped students make informed career choices. 150+ students chose appropriate courses, and 50+ students secured internships through our network of partner organizations.',
+                        participants: '300+',
+                        location: 'Career Center'
+                    },
+                    {
+                        title: 'Library Establishment',
+                        date: 'February 2024',
+                        image: 'sunimages/sun48.jpg',
+                        description: 'Established libraries in 5 rural schools',
+                        impact: 'The libraries now serve 1,500+ students with 5,000+ books. Reading habits improved by 70%, and we organized 20+ reading competitions to encourage literacy.',
+                        participants: '1500+',
+                        location: '5 Schools'
+                    }
+                ]
+            },
+            'green-warriors': {
+                name: 'Green Warriors',
+                motto: 'Protecting our planet, one action at a time',
+                mission: 'Dedicated to environmental conservation and sustainability. Working to protect our planet through tree planting, waste management, and environmental education.',
+                size: '28 Members',
+                eventsCount: '14',
+                leader: {
+                    name: 'Sneha Verma',
+                    role: 'Environmental Coordinator',
+                    bio: 'Sneha is an environmental scientist passionate about conservation. She leads our green initiatives and sustainability programs.',
+                    initials: 'SV'
+                },
+                events: [
+                    {
+                        title: 'Tree Plantation Drive',
+                        date: 'April 2024',
+                        image: 'sunimages/sun39.jpg',
+                        description: 'Planted 1000+ trees across 5 villages',
+                        impact: 'The plantation drive increased green cover by 15% in the target areas. We established a monitoring system where local communities maintain the trees. 80% survival rate achieved.',
+                        participants: '500+',
+                        location: '5 Villages'
+                    },
+                    {
+                        title: 'Waste Management Workshop',
+                        date: 'March 2024',
+                        image: 'sunimages/sun35.jpg',
+                        description: 'Educated 400+ people about proper waste disposal',
+                        impact: 'The workshop led to 60% reduction in improper waste disposal. We established 10 waste collection points and trained 20 waste management volunteers. Composting units were set up in 5 villages.',
+                        participants: '400+',
+                        location: 'Community Centers'
+                    },
+                    {
+                        title: 'Clean Village Campaign',
+                        date: 'February 2024',
+                        image: 'sunimages/sun4.jpg',
+                        description: 'Cleaned 10 villages and established waste collection systems',
+                        impact: 'The campaign removed 50+ tons of waste and established sustainable waste management systems. Villages now have regular cleaning schedules and proper waste segregation practices.',
+                        participants: '800+',
+                        location: '10 Villages'
+                    }
+                ]
+            },
+            'digital-dreamers': {
+                name: 'Digital Dreamers',
+                motto: 'Innovation for social impact',
+                mission: 'Leveraging technology and innovation to solve social problems. Creating digital solutions that make a real difference in people\'s lives.',
+                size: '22 Members',
+                eventsCount: '12',
+                leader: {
+                    name: 'Rahul Singh',
+                    role: 'Innovation Lead & Tech Coordinator',
+                    bio: 'Rahul is a tech entrepreneur focused on social innovation. He leads our digital transformation initiatives.',
+                    initials: 'RS'
+                },
+                events: [
+                    {
+                        title: 'Digital Innovation Hackathon',
+                        date: 'April 2024',
+                        image: 'sunimages/sun14.jpg',
+                        description: 'Organized hackathon with 150+ participants solving social problems',
+                        impact: 'The hackathon generated 25+ innovative solutions for social challenges. 5 winning teams received funding and mentorship to implement their solutions. 3 solutions are now being piloted in rural communities.',
+                        participants: '150+',
+                        location: 'Innovation Hub'
+                    },
+                    {
+                        title: 'Smart Village Project',
+                        date: 'March 2024',
+                        image: 'sunimages/sun7.jpg',
+                        description: 'Implemented digital solutions in 3 villages',
+                        impact: 'The project introduced digital governance, online education platforms, and e-commerce solutions. 2,000+ villagers now have access to digital services, improving efficiency and transparency.',
+                        participants: '2000+',
+                        location: '3 Villages'
+                    },
+                    {
+                        title: 'Tech for Good Workshop',
+                        date: 'February 2024',
+                        image: 'sunimages/sun48.jpg',
+                        description: 'Trained 80+ students in social innovation and technology',
+                        impact: 'Students learned to develop technology solutions for social problems. 20+ students created prototypes for community challenges, and 5 projects received funding for further development.',
+                        participants: '80+',
+                        location: 'Tech Institute'
+                    }
+                ]
+            }
+        };
+
+        // Team Selection Functionality
+        const teamCards = document.querySelectorAll('.team-card');
+        const defaultState = document.getElementById('default-state');
+        const teamContent = document.getElementById('team-content');
+
+        teamCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove active class from all cards
+                teamCards.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked card
+                card.classList.add('active');
+                
+                // Get team data
+                const teamId = card.dataset.team;
+                const teamData = teamsData[teamId];
+                
+                // Hide default state and show team content
+                defaultState.classList.add('hidden');
+                teamContent.classList.remove('hidden');
+                
+                // Populate team information
+                document.getElementById('team-name').textContent = teamData.name;
+                document.getElementById('team-motto').textContent = teamData.motto;
+                document.getElementById('team-mission').textContent = teamData.mission;
+                document.getElementById('team-size').textContent = teamData.size;
+                document.getElementById('events-count').textContent = teamData.eventsCount;
+                
+                // Populate leader information
+                document.getElementById('leader-name').textContent = teamData.leader.name;
+                document.getElementById('leader-role').textContent = teamData.leader.role;
+                document.getElementById('leader-bio').textContent = teamData.leader.bio;
+                document.getElementById('leader-initials').textContent = teamData.leader.initials;
+                
+                // Populate events
+                const eventsGrid = document.getElementById('events-grid');
+                eventsGrid.innerHTML = '';
+                
+                teamData.events.forEach((event, index) => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl';
+                    eventCard.innerHTML = eventCard.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl';
+eventCard.innerHTML = `
+    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
+        <img src="${event.image}" alt="${event.title}" class="w-full h-full object-cover">
+        <div class="absolute top-3 right-3 bg-orange-500 text-white px-2 py-1 rounded text-sm">
+            ${event.date}
+        </div>
+        <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+            <div class="text-black opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <i class="fas fa-eye text-2xl"></i>
+            </div>
+        </div>
+    </div>
+    <div class="p-6">
+        <h4 class="text-lg font-semibold text-black mb-2">${event.title}</h4>
+        <p class="text-black text-sm">${event.description}</p>
+        <div class="mt-4 flex items-center text-orange-500 text-sm">
+            <i class="fas fa-users mr-2"></i>
+            <span>${event.participants} participants</span>
+        </div>
+    </div>
+`;
+
+                    // Add click event for modal
+                    eventCard.addEventListener('click', () => {
+                        showEventModal(event);
+                    });
+                    
+                    eventsGrid.appendChild(eventCard);
+                });
+                
+                // Smooth scroll to team details section
+                setTimeout(() => {
+                    document.getElementById('team-content').scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 100);
+            });
+        });
+
+        // Modal Functionality
+        const modal = document.getElementById('eventModal');
+        const closeBtn = document.querySelector('.close');
+
+        function showEventModal(event) {
+            document.getElementById('modal-event-title').textContent = event.title;
+            document.getElementById('modal-event-date').textContent = event.date;
+            document.getElementById('modal-event-image').src = event.image;
+            document.getElementById('modal-event-description').textContent = event.description;
+            document.getElementById('modal-event-impact').textContent = event.impact;
+            document.getElementById('modal-participants').textContent = event.participants;
+            document.getElementById('modal-location').textContent = event.location;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking the close button
+        closeBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside the modal content
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // Set initial theme
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            body.classList.add('dark');
+            themeToggle.classList.add('dark');
+        }
+        
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            themeToggle.classList.toggle('dark');
+            
+            // Save preference
+            const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+        });
+
+        console.log('Teams page loaded successfully! 🌟');
+    </script>
+</body>
+</html> 

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .payment-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen p-6">
+    <div class="max-w-4xl mx-auto py-12 px-6">
+        <h1 class="text-4xl font-bold text-gray-900 text-center mb-8 bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">Donate to Support Our Cause</h1>
+        <p class="text-center text-gray-600 mb-10 text-lg">Your contribution helps transform lives through education and community development.</p>
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+            <form id="donationForm" class="space-y-6">
+                <div>
+                    <label for="amount" class="block text-sm font-medium text-gray-700">Donation Amount (INR)</label>
+                    <select id="amount" name="amount" class="mt-2 block w-full rounded-lg border-gray-200 shadow-sm p-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-gray-900">
+                        <option value="100">₹100</option>
+                        <option value="500">₹500</option>
+                        <option value="1000">₹1000</option>
+                        <option value="5000">₹5000</option>
+                        <option value="other">Other Amount</option>
+                    </select>
+                </div>
+                <div id="customAmount" class="hidden">
+                    <label for="custom" class="block text-sm font-medium text-gray-700">Enter Custom Amount</label>
+                    <input type="number" id="custom" name="custom" class="mt-2 block w-full rounded-lg border-gray-200 shadow-sm p-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-gray-900" min="1" placeholder="₹ Enter amount">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Payment Method</label>
+                    <div class="mt-4 space-y-4">
+                        <label class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-200 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="netbanking" class="h-5 w-5 text-orange-500 focus:ring-orange-500" checked>
+                            <img src="https://img.icons8.com/ios-filled/50/000000/bank-building.png" alt="Net Banking" class="payment-logo">
+                            <span class="ml-2 text-base text-gray-700 font-medium">Net Banking</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-200 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="upi" class="h-5 w-5 text-orange-500 focus:ring-orange-500">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/upi.png" alt="UPI" class="payment-logo">
+                            <span class="ml-2 text-base text-gray-700 font-medium">UPI</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-200 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="creditcard" class="h-5 w-5 text-orange-500 focus:ring-orange-500">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/credit-card.png" alt="Credit Card" class="payment-logo">
+                            <span class="ml-2 text-base text-gray-700 font-medium">Credit Card</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-200 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="debitcard" class="h-5 w-5 text-orange-500 focus:ring-orange-500">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/debit-card.png" alt="Debit Card" class="payment-logo">
+                            <span class="ml-2 text-base text-gray-700 font-medium">Debit Card</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="paymentDetails" class="space-y-6">
+                    <!-- Net Banking Fields (Default) -->
+                    <div id="netbankingFields">
+                        <label for="bank" class="block text-sm font-medium text-gray-700">Select Bank</label>
+                        <select id="bank" name="bank" class="mt-2 block w-full rounded-lg border-gray-200 shadow-sm p-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-gray-900">
+                            <option value="hdfc">HDFC Bank</option>
+                            <option value="icici">ICICI Bank</option>
+                            <option value="sbi">State Bank of India</option>
+                            <option value="axis">Axis Bank</option>
+                        </select>
+                    </div>
+                    <!-- UPI Fields (Hidden by default) -->
+                    <div id="upiFields" class="hidden">
+                        <label for="upiId" class="block text-sm font-medium text-gray-700">Enter UPI ID</label>
+                        <input type="text" id="upiId" name="upiId" placeholder="example@bankname" class="mt-2 block w-full rounded-lg border-gray-200 shadow-sm p-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-gray-900">
+                    </div>
+                    <!-- Credit/Debit Card Fields (Hidden by default) -->
+                    <div id="cardFields" class="hidden">
+                        <label for="cardNumber" class="block text-sm font-medium text-gray-700">Card Number</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" class="mt-2 block w-full rounded-lg border-gray-200 shadow-sm p-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-gray-900">
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div>
+                                <label for="expiry" class="block text-sm font-medium text-gray-700">Expiry Date (MM/YY)</label>
+                                <input type="text" id="expiry" name="expiry" placeholder="MM/YY" class="mt-2 block w-full rounded-lg border-gray-200 shadow-sm p-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-gray-900">
+                            </div>
+                            <div>
+                                <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" class="mt-2 block w-full rounded-lg border-gray-200 shadow-sm p-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-gray-900">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-3 rounded-lg hover:from-orange-600 hover:to-yellow-600 transition duration-300 text-lg font-semibold shadow-md">Donate Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transaction Initiated Modal -->
+    <div id="transactionModal" class="modal">
+        <div class="modal-content">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Transaction Initiated</h2>
+            <p class="text-gray-600 mb-6">Your donation is being processed. You will be redirected shortly or notified of the status.</p>
+            <button id="closeModal" class="bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition duration-200">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('amount').addEventListener('change', function() {
+            const customAmount = document.getElementById('customAmount');
+            if (this.value === 'other') {
+                customAmount.classList.remove('hidden');
+            } else {
+                customAmount.classList.add('hidden');
+            }
+        });
+
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const paymentDetails = document.getElementById('paymentDetails');
+                const netbankingFields = document.getElementById('netbankingFields');
+                const upiFields = document.getElementById('upiFields');
+                const cardFields = document.getElementById('cardFields');
+
+                netbankingFields.classList.add('hidden');
+                upiFields.classList.add('hidden');
+                cardFields.classList.add('hidden');
+
+                if (this.value === 'netbanking') {
+                    netbankingFields.classList.remove('hidden');
+                } else if (this.value === 'upi') {
+                    upiFields.classList.remove('hidden');
+                } else if (this.value === 'creditcard' || this.value === 'debitcard') {
+                    cardFields.classList.remove('hidden');
+                }
+            });
+        });
+
+        document.getElementById('donationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const modal = document.getElementById('transactionModal');
+            modal.style.display = 'block';
+
+            const amount = document.getElementById('amount').value === 'other' ? document.getElementById('custom').value : document.getElementById('amount').value;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            let details = '';
+
+            if (paymentMethod === 'netbanking') {
+                details = `Bank: ${document.getElementById('bank').value}`;
+            } else if (paymentMethod === 'upi') {
+                details = `UPI ID: ${document.getElementById('upiId').value}`;
+            } else if (paymentMethod === 'creditcard' || paymentMethod === 'debitcard') {
+                details = `Card Number: ${document.getElementById('cardNumber').value}, Expiry: ${document.getElementById('expiry').value}, CVV: ${document.getElementById('cvv').value}`;
+            }
+
+            // Simulate transaction processing
+            setTimeout(() => {
+                alert(`Transaction Initiated for ₹${amount} via ${paymentMethod}! Details: ${details}. This is a placeholder. In a real implementation, integrate with a payment gateway.`);
+                modal.style.display = 'none';
+            }, 2000);
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('transactionModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('transactionModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+    </body>
+    </html>
